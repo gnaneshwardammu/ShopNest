@@ -1,0 +1,583 @@
+{
+  "info": {
+    "_postman_id": "0dc910a7-71b4-406d-8318-7bf6579de586",
+    "name": "ShopNest-MERN",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56060867",
+    "_collection_link": "https://go.postman.co/collection/56060867-0dc910a7-71b4-406d-8318-7bf6579de586?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth Routs",
+      "item": [
+        {
+          "name": "login user",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\" : \"gnaneshwar\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\":\"12345\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{endpoint}} /api/auth/register",
+              "host": [
+                "{{endpoint}} "
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Health",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "postman-echo.com/get",
+              "host": [
+                "postman-echo",
+                "com"
+              ],
+              "path": [
+                "get"
+              ]
+            },
+            "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+          },
+          "response": []
+        },
+        {
+          "name": "Register user",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\" : \"gnaneshwar\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\":\"gnan1234567\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{endpoint}} /api/auth/register",
+              "host": [
+                "{{endpoint}} "
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ADMIN --GET ALL USERS",
+          "request": {
+            "auth": {
+              "type": "bearer"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\" : \"gnaneshwar\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\":\"12345\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{endpoint}} /api/auth/register",
+              "host": [
+                "{{endpoint}} "
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product Routs",
+      "item": [
+        {
+          "name": "Admin --Delete Single Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "type": "text",
+                  "key": "name",
+                  "value": "Updated Product"
+                },
+                {
+                  "type": "text",
+                  "key": "description",
+                  "value": "Updated description"
+                },
+                {
+                  "type": "text",
+                  "key": "price",
+                  "value": "2499"
+                },
+                {
+                  "type": "text",
+                  "key": "category",
+                  "value": "Electronics"
+                },
+                {
+                  "type": "text",
+                  "key": "stock",
+                  "value": "15"
+                },
+                {
+                  "type": "file",
+                  "key": "image",
+                  "src": "C:/path/to/new-image.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/products/PRODUCT_ID",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "products",
+                "PRODUCT_ID"
+              ]
+            },
+            "description": "Generated from cURL: curl -X PUT \"http://localhost:5000/api/products/PRODUCT_ID\" \\\n  -H \"Authorization: Bearer YOUR_JWT_TOKEN\" \\\n  -F \"name=Updated Product\" \\\n  -F \"description=Updated description\" \\\n  -F \"price=2499\" \\\n  -F \"category=Electronics\" \\\n  -F \"stock=15\" \\\n  -F \"image=@C:/path/to/new-image.jpg\""
+          },
+          "response": []
+        },
+        {
+          "name": "Admin --Edit Single Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "type": "text",
+                  "key": "name",
+                  "value": "Updated Product"
+                },
+                {
+                  "type": "text",
+                  "key": "description",
+                  "value": "Updated description"
+                },
+                {
+                  "type": "text",
+                  "key": "price",
+                  "value": "2499"
+                },
+                {
+                  "type": "text",
+                  "key": "category",
+                  "value": "Electronics"
+                },
+                {
+                  "type": "text",
+                  "key": "stock",
+                  "value": "15"
+                },
+                {
+                  "type": "file",
+                  "key": "image",
+                  "src": "C:/path/to/new-image.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/products/PRODUCT_ID",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "products",
+                "PRODUCT_ID"
+              ]
+            },
+            "description": "Generated from cURL: curl -X PUT \"http://localhost:5000/api/products/PRODUCT_ID\" \\\n  -H \"Authorization: Bearer YOUR_JWT_TOKEN\" \\\n  -F \"name=Updated Product\" \\\n  -F \"description=Updated description\" \\\n  -F \"price=2499\" \\\n  -F \"category=Electronics\" \\\n  -F \"stock=15\" \\\n  -F \"image=@C:/path/to/new-image.jpg\""
+          },
+          "response": []
+        },
+        {
+          "name": "Admin --Create New Productt",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "type": "text",
+                  "key": "name",
+                  "value": "Test Product"
+                },
+                {
+                  "type": "text",
+                  "key": "description",
+                  "value": "Sample description"
+                },
+                {
+                  "type": "text",
+                  "key": "price",
+                  "value": "1999"
+                },
+                {
+                  "type": "text",
+                  "key": "category",
+                  "value": "Electronics"
+                },
+                {
+                  "type": "text",
+                  "key": "stock",
+                  "value": "10"
+                },
+                {
+                  "type": "file",
+                  "key": "image",
+                  "src": "C:/path/to/image.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/products",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \"http://localhost:5000/api/products\" \\\n  -H \"Authorization: Bearer YOUR_JWT_TOKEN\" \\\n  -F \"name=Test Product\" \\\n  -F \"description=Sample description\" \\\n  -F \"price=1999\" \\\n  -F \"category=Electronics\" \\\n  -F \"stock=10\" \\\n  -F \"image=@C:/path/to/image.jpg\""
+          },
+          "response": []
+        },
+        {
+          "name": "GET ONE PRODUCTS",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "GET ALL PRODUCTS",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Order Routes",
+      "item": [
+        {
+          "name": "Place A Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"items\": [\r\n      {\r\n        \"product\": \"66a1b2c3d4e5f67890123456\",\r\n        \"quantity\": 2,\r\n        \"price\": 499\r\n      }\r\n    ],\r\n    \"totalAmount\": 998,\r\n    \"address\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"street\": \"123 Main St\",\r\n      \"city\": \"New York\",\r\n      \"state\": \"NY\",\r\n      \"postalCode\": \"10001\",\r\n      \"country\": \"USA\"\r\n    },\r\n    \"paymentId\": \"pay_123456789\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "orders"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \"http://localhost:5000/api/orders\" \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -H \"Authorization: Bearer YOUR_JWT_TOKEN\" \\\r\n  -d '{\r\n    \"items\": [\r\n      {\r\n        \"product\": \"66a1b2c3d4e5f67890123456\",\r\n        \"quantity\": 2,\r\n        \"price\": 499\r\n      }\r\n    ],\r\n    \"totalAmount\": 998,\r\n    \"address\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"street\": \"123 Main St\",\r\n      \"city\": \"New York\",\r\n      \"state\": \"NY\",\r\n      \"postalCode\": \"10001\",\r\n      \"country\": \"USA\"\r\n    },\r\n    \"paymentId\": \"pay_123456789\"\r\n  }'"
+          },
+          "response": []
+        },
+        {
+          "name": "Admin --All Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"items\": [\r\n      {\r\n        \"product\": \"66a1b2c3d4e5f67890123456\",\r\n        \"quantity\": 2,\r\n        \"price\": 499\r\n      }\r\n    ],\r\n    \"totalAmount\": 998,\r\n    \"address\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"street\": \"123 Main St\",\r\n      \"city\": \"New York\",\r\n      \"state\": \"NY\",\r\n      \"postalCode\": \"10001\",\r\n      \"country\": \"USA\"\r\n    },\r\n    \"paymentId\": \"pay_123456789\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "orders"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \"http://localhost:5000/api/orders\" \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -H \"Authorization: Bearer YOUR_JWT_TOKEN\" \\\r\n  -d '{\r\n    \"items\": [\r\n      {\r\n        \"product\": \"66a1b2c3d4e5f67890123456\",\r\n        \"quantity\": 2,\r\n        \"price\": 499\r\n      }\r\n    ],\r\n    \"totalAmount\": 998,\r\n    \"address\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"street\": \"123 Main St\",\r\n      \"city\": \"New York\",\r\n      \"state\": \"NY\",\r\n      \"postalCode\": \"10001\",\r\n      \"country\": \"USA\"\r\n    },\r\n    \"paymentId\": \"pay_123456789\"\r\n  }'"
+          },
+          "response": []
+        },
+        {
+          "name": "Admin --Update Order Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"items\": [\r\n      {\r\n        \"product\": \"66a1b2c3d4e5f67890123456\",\r\n        \"quantity\": 2,\r\n        \"price\": 499\r\n      }\r\n    ],\r\n    \"totalAmount\": 998,\r\n    \"address\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"street\": \"123 Main St\",\r\n      \"city\": \"New York\",\r\n      \"state\": \"NY\",\r\n      \"postalCode\": \"10001\",\r\n      \"country\": \"USA\"\r\n    },\r\n    \"paymentId\": \"pay_123456789\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "orders"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \"http://localhost:5000/api/orders\" \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -H \"Authorization: Bearer YOUR_JWT_TOKEN\" \\\r\n  -d '{\r\n    \"items\": [\r\n      {\r\n        \"product\": \"66a1b2c3d4e5f67890123456\",\r\n        \"quantity\": 2,\r\n        \"price\": 499\r\n      }\r\n    ],\r\n    \"totalAmount\": 998,\r\n    \"address\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"street\": \"123 Main St\",\r\n      \"city\": \"New York\",\r\n      \"state\": \"NY\",\r\n      \"postalCode\": \"10001\",\r\n      \"country\": \"USA\"\r\n    },\r\n    \"paymentId\": \"pay_123456789\"\r\n  }'"
+          },
+          "response": []
+        },
+        {
+          "name": "My Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"items\": [\r\n      {\r\n        \"product\": \"66a1b2c3d4e5f67890123456\",\r\n        \"quantity\": 2,\r\n        \"price\": 499\r\n      }\r\n    ],\r\n    \"totalAmount\": 998,\r\n    \"address\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"street\": \"123 Main St\",\r\n      \"city\": \"New York\",\r\n      \"state\": \"NY\",\r\n      \"postalCode\": \"10001\",\r\n      \"country\": \"USA\"\r\n    },\r\n    \"paymentId\": \"pay_123456789\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "orders"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \"http://localhost:5000/api/orders\" \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -H \"Authorization: Bearer YOUR_JWT_TOKEN\" \\\r\n  -d '{\r\n    \"items\": [\r\n      {\r\n        \"product\": \"66a1b2c3d4e5f67890123456\",\r\n        \"quantity\": 2,\r\n        \"price\": 499\r\n      }\r\n    ],\r\n    \"totalAmount\": 998,\r\n    \"address\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"street\": \"123 Main St\",\r\n      \"city\": \"New York\",\r\n      \"state\": \"NY\",\r\n      \"postalCode\": \"10001\",\r\n      \"country\": \"USA\"\r\n    },\r\n    \"paymentId\": \"pay_123456789\"\r\n  }'"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Admin --Analytics",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"items\": [\r\n      {\r\n        \"product\": \"66a1b2c3d4e5f67890123456\",\r\n        \"quantity\": 2,\r\n        \"price\": 499\r\n      }\r\n    ],\r\n    \"totalAmount\": 998,\r\n    \"address\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"street\": \"123 Main St\",\r\n      \"city\": \"New York\",\r\n      \"state\": \"NY\",\r\n      \"postalCode\": \"10001\",\r\n      \"country\": \"USA\"\r\n    },\r\n    \"paymentId\": \"pay_123456789\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "orders"
+              ]
+            },
+            "description": "Generated from cURL: curl -X POST \"http://localhost:5000/api/orders\" \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -H \"Authorization: Bearer YOUR_JWT_TOKEN\" \\\r\n  -d '{\r\n    \"items\": [\r\n      {\r\n        \"product\": \"66a1b2c3d4e5f67890123456\",\r\n        \"quantity\": 2,\r\n        \"price\": 499\r\n      }\r\n    ],\r\n    \"totalAmount\": 998,\r\n    \"address\": {\r\n      \"fullName\": \"John Doe\",\r\n      \"street\": \"123 Main St\",\r\n      \"city\": \"New York\",\r\n      \"state\": \"NY\",\r\n      \"postalCode\": \"10001\",\r\n      \"country\": \"USA\"\r\n    },\r\n    \"paymentId\": \"pay_123456789\"\r\n  }'"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "endpoint",
+      "value": ""
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "shopnest-full-stack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "install": "cd backend && npm install && cd ../frontend && npm install",
+    "start": "cd backend && npm start",
+    "start:backend": "npm --prefix backend start",
+    "start:frontend": "cross-env HOST=0.0.0.0 npm --prefix frontend start",
+    "seed": "npm --prefix backend run seed",
+    "dev:server": "cd backend && npm run dev",
+    "dev:client": "cd frontend && npm start",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "build": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "Ecommerce",
+    "microservice"
+  ],
+  "author": "Gnaneshwar Dammu",
+  "license": "ISC",
+  "description": "",
+  "type": "commonjs",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.12.0",
+    "concurrently": "^10.0.3",
+    "react-redux": "^9.3.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
+  }
+}
