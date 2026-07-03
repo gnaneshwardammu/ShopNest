@@ -10,7 +10,6 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext);
 
-  const categories = ['Electronics', 'Home', 'Fashion', 'Accessories'];
 
   useEffect(() => {
     const fetchProducts = async () => {

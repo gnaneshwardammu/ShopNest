@@ -22,16 +22,21 @@ export const NotificationProvider = ({ children }) => {
   }, []);
 
   const closeModal = useCallback((result) => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-    setModalState((current) => ({ ...current, open: false }));
-    if (resolverRef.current) {
-      resolverRef.current(result);
-      resolverRef.current = null;
-    }
-  }, []);
+  if (timerRef.current) {
+    clearTimeout(timerRef.current);
+    timerRef.current = null;
+  }
+
+  setModalState((current) => ({
+    ...current,
+    open: false,
+  }));
+
+  if (resolverRef.current) {
+    resolverRef.current(result);
+    resolverRef.current = null;
+  }
+}, []);
 
   const showModal = useCallback((options = {}) =>
     new Promise((resolve) => {
@@ -52,7 +57,7 @@ export const NotificationProvider = ({ children }) => {
       if (options.autoCloseMs) {
         timerRef.current = setTimeout(() => closeModal({ dismissed: true }), options.autoCloseMs);
       }
-    }), []);
+    }), [closeModal]);
 
   return (
     <NotificationContext.Provider value={{ showModal, closeModal }}>
