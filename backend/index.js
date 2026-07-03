@@ -9,7 +9,7 @@ connectDB();
 const app = express();
 app.use(cors(
   {
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'], // Replace with your frontend URL
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://eshop-nest.vercel.app/'], // Replace with your frontend URL
     credentials: true, // Allow cookies to be sent
   }
 ));
@@ -19,7 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send("Welcome to Shopnet Backend");
 });
-
+app.get("/api/health", (req, res) => {
+  res.json({ status: "OK" });
+});
 app.use('/api/auth', userRoutes);
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
