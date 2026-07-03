@@ -27,7 +27,7 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "https://shopnest-mcq8.onrender.com/",
 
   "browserslist": {
     "production": [
