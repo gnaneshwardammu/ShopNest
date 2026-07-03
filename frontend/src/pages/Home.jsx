@@ -5,11 +5,11 @@ import ProductCard from '../components/ProductCard';
 import { AuthContext } from '../context/AuthContext';
 import '../styles/product.css';
 
+const api= process.env.REACT_APP_API_URL || 'http://localhost:5000';
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext);
-  const api= process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -24,7 +24,7 @@ const Home = () => {
       }
     };
     fetchProducts();
-  }, []);
+  }, [api]);
 
   return (
     <div className="home-page">
