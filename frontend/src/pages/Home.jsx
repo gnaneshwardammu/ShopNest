@@ -9,12 +9,12 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext);
-
+  const api= process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('/api/products');
+        const res = await fetch(`${api}/api/products`);
         const data = await res.json();
         setProducts(data.slice(0, 4)); // Featured products
       } catch (error) {
