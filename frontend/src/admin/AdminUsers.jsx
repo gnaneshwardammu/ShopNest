@@ -36,7 +36,7 @@ const AdminUsers = () => {
             {users.map(u => (
               <tr key={u._id} style={rowStyle}>
                 <td style={tdStyle}>{u._id.substring(0, 8)}...</td>
-                <td style={tdStyle}>{u.name}</td>
+                <td style={tdStyle}>{u.username}</td>
                 <td style={tdStyle}>{u.email}</td>
                 <td style={tdStyle}>
                   <span style={{ background: u.role === 'admin' ? 'rgba(234,88,12,0.2)' : 'rgba(16,185,129,0.2)', color: u.role === 'admin' ? '#f97316' : '#10b981', padding: '4px 8px', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 'bold' }}>

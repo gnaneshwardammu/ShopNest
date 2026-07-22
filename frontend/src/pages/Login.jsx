@@ -29,7 +29,7 @@ const Login = () => {
                     message: 'You are now signed in.',
                     type: 'success',
                     placement: 'toast',
-                    autoCloseMs: 5000,
+                    autoCloseMs: 1000,
                 });
                 login(data);
                 navigate('/');
