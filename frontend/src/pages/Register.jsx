@@ -22,12 +22,14 @@ const Register = () => {
         body: JSON.stringify({ username: name, email, phone, password, role })
       });
       const data = await res.json();
-      if (res.ok) {
+      if (res.ok || res.status === 503) {
         localStorage.setItem('pendingOtpEmail', email);
         await showModal({
-          title: 'Registration Successful',
-          message: 'Please check your email for the OTP and verify your account.',
-          type: 'success',
+          title: res.ok ? 'Registration Successful' : 'Verification Email Delayed',
+          message: res.ok
+            ? 'Please check your email for the OTP and verify your account.'
+            : 'Your account was created, but the OTP email could not be sent. Use Resend OTP after the backend email settings are corrected.',
+          type: res.ok ? 'success' : 'error',
           placement: 'toast',
           autoCloseMs: 1000,
         });
