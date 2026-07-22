@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
+import { apiFetch } from '../services/api';
 import '../styles/product.css';
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/products`);
+        const res = await apiFetch('/api/products');
+        if (!res.ok) {
+          throw new Error(`Unable to load products (${res.status})`);
+        }
         const data = await res.json();
-        setProducts(data);
+        console.log('Products response:', res);
+        console.log('Products data:', data);
+        setProducts(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error(error);
+        setError('Unable to load products. Please try again shortly.');
       } finally {
         setLoading(false);
       }
@@ -36,11 +44,14 @@ const Shop = () => {
       />
       {loading ? (
         <div>Loading...</div>
+      ) : error ? (
+        <div>{error}</div>
       ) : (
         <div className="product-grid">
           {filteredProducts.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
+          {filteredProducts.length === 0 && <div>No products found.</div>}
         </div>
       )}
     </div>

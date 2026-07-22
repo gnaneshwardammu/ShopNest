@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useNotification } from '../context/NotificationContext';
 import '../styles/auth.css';
+import { apiFetch } from '../services/api';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -15,7 +16,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('/api/auth/register', {
+      const res = await apiFetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: name, email, phone, password, role })

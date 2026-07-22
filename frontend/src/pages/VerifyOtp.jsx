@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/auth.css';
+import { apiFetch } from '../services/api';
 
 const VerifyOtp = () => {
   const [email, setEmail] = useState(localStorage.getItem('pendingOtpEmail') || '');
@@ -15,7 +16,7 @@ const VerifyOtp = () => {
     setMessage('');
 
     try {
-      const res = await fetch('/api/auth/verify-otp', {
+      const res = await apiFetch('/api/auth/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp }),
@@ -48,7 +49,7 @@ const VerifyOtp = () => {
     setMessage('');
 
     try {
-      const res = await fetch('/api/auth/resend-otp', {
+      const res = await apiFetch('/api/auth/resend-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

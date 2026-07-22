@@ -6,6 +6,7 @@ import { AuthContext } from '../context/AuthContext';
 import { useNotification } from '../context/NotificationContext';
 import { useContext } from 'react';
 import "../styles/product.css";
+import { apiFetch } from '../services/api';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`/api/products/${id}`);
+        const response = await apiFetch(`/api/products/${id}`);
         const data = await response.json();
 
         if (!response.ok || !data || data.message) {

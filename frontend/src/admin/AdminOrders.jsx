@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { apiFetch } from '../services/api';
 
 const AdminOrders = () => {
   const { user } = useContext(AuthContext);
@@ -17,7 +18,7 @@ const AdminOrders = () => {
 
     const fetchOrders = async () => {
       try {
-        const res = await fetch('/api/orders', {
+        const res = await apiFetch('/api/orders', {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         const data = await res.json();
@@ -35,7 +36,7 @@ const AdminOrders = () => {
   const handleStatusChange = async (orderId, status) => {
     setUpdatingId(orderId);
     try {
-      const res = await fetch(`/api/orders/${orderId}/status`, {
+      const res = await apiFetch(`/api/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

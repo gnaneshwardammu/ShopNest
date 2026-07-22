@@ -3,6 +3,7 @@ import {useNavigate, Link} from 'react-router-dom';
 import {AuthContext} from '../context/AuthContext';
 import { useNotification } from '../context/NotificationContext';
 import '../styles/auth.css';
+import { apiFetch } from '../services/api';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -14,7 +15,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('/api/auth/login',{
+            const res = await apiFetch('/api/auth/login',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

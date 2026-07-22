@@ -3,9 +3,9 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { AuthContext } from '../context/AuthContext';
+import { apiFetch } from '../services/api';
 import '../styles/product.css';
 
-const api= process.env.REACT_APP_API_URL || 'http://localhost:5000';
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,9 +14,10 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(`${api}/api/products`);
+        const res = await apiFetch('/api/products');
+        if (!res.ok) throw new Error(`Unable to load products (${res.status})`);
         const data = await res.json();
-        setProducts(data.slice(0, 4)); // Featured products
+        setProducts(Array.isArray(data) ? data.slice(0, 4) : []); // Featured products
       } catch (error) {
         console.error(error);
       } finally {

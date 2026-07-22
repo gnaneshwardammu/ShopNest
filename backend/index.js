@@ -7,12 +7,17 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors(
-  {
-    origin: 'https://eshop-nest.vercel.app/', // Replace with your frontend URL
-    credentials: true, // Allow cookies to be sent
-  }
-));
+// CORS must run before routes. The `cors` middleware also handles OPTIONS
+// preflight requests for these origins.
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+  'https://eshop-nest.vercel.app',
+  process.env.FRONTEND_URL && process.env.FRONTEND_URL.replace(/\/+$/, ''),
+].filter(Boolean);
+
+app.use(cors({ origin: allowedOrigins, credentials: true }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
