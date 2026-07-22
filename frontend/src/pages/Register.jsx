@@ -29,7 +29,7 @@ const Register = () => {
           message: 'Please check your email for the OTP and verify your account.',
           type: 'success',
           placement: 'toast',
-          autoCloseMs: 5000,
+          autoCloseMs: 1000,
         });
         navigate('/verify-otp');
       } else {
