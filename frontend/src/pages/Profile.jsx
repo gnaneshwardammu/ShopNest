@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { apiFetch } from '../services/api';
+import { sortByNewest } from '../utils/sortByNewest';
 
 const Profile = () => {
   const { user, logout } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const Profile = () => {
         });
         const data = await res.json();
         if (res.ok) {
-          setOrders(Array.isArray(data) ? data : []);
+          setOrders(Array.isArray(data) ? sortByNewest(data) : []);
         } else {
           // Token obsolete or 401: clear and bounce
           if (res.status === 401) {

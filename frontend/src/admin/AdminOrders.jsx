@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '../services/api';
+import { sortByNewest } from '../utils/sortByNewest';
 
 const AdminOrders = () => {
   const { user } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const AdminOrders = () => {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         const data = await res.json();
-        setOrders(Array.isArray(data) ? data : []);
+        setOrders(Array.isArray(data) ? sortByNewest(data) : []);
       } catch (error) {
         console.error(error);
       } finally {

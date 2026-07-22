@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { apiFetch } from '../services/api';
+import { sortByNewest } from '../utils/sortByNewest';
 
 const AdminUsers = () => {
   const { user } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const AdminUsers = () => {
         headers: { Authorization: `Bearer ${user.token}` }
       });
       const data = await res.json();
-      setUsers(Array.isArray(data) ? data : []);
+      setUsers(Array.isArray(data) ? sortByNewest(data) : []);
     };
     fetchUsers();
   }, [user]);
