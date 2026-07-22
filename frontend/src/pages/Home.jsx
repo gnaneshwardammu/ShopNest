@@ -24,7 +24,7 @@ const Home = () => {
       }
     };
     fetchProducts();
-  }, [api]);
+  }, []);
 
   return (
     <div className="home-page">
