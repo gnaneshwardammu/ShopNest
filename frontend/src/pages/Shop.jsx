@@ -10,7 +10,7 @@ const Shop = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('/api/products');
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/products`);
         const data = await res.json();
         setProducts(data);
       } catch (error) {
