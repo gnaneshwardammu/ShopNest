@@ -11,6 +11,7 @@ const createOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
 
 // Register a new user  
 const registerUser = async (req, res) => {
+  let accountCreated = false;
   try {
     const { username, name, email, phone, password, role } = req.body;
     const displayName = username || name;
@@ -34,6 +35,7 @@ const registerUser = async (req, res) => {
       verified: false,
       role: userRole,
     });
+    accountCreated = Boolean(user);
     if (user) {
 
       const message = `
@@ -63,7 +65,13 @@ const registerUser = async (req, res) => {
       res.status(400).json({ message: 'Invalid user data' });
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Registration email error:', error);
+    if (accountCreated) {
+      return res.status(503).json({
+        message: 'Account created, but the verification email could not be sent. Please use Resend OTP.',
+      });
+    }
+    res.status(500).json({ message: 'Unable to create the account.' });
   }
 };
 
@@ -179,7 +187,8 @@ const resendOtp = async (req, res) => {
 
     res.json({ message: 'OTP resent successfully' });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    console.error('OTP resend email error:', error);
+    res.status(503).json({ message: 'Unable to send the OTP email. Please try again shortly.' });
   }
 };
 

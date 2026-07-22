@@ -55,7 +55,7 @@ const VerifyOtp = () => {
         body: JSON.stringify({ email }),
       });
       const data = await res.json();
-      setMessage(data.message || 'OTP resent successfully.');
+      setMessage(res.ok ? (data.message || 'OTP resent successfully.') : (data.message || 'Unable to resend OTP. Please try again.'));
     } catch (error) {
       setMessage('Unable to resend OTP. Please try again.');
       console.error(error);

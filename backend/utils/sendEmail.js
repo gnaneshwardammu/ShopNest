@@ -1,37 +1,39 @@
 const nodeMailer = require('nodemailer');
 
-const sendEmail = async (optionsOrTo, subject, text) => { 
-    try {
-        const options = typeof optionsOrTo === 'object'
-            ? optionsOrTo
-            : { to: optionsOrTo, subject, text };
+const sendEmail = async (optionsOrTo, subject, text) => {
+    const options = typeof optionsOrTo === 'object'
+        ? optionsOrTo
+        : { to: optionsOrTo, subject, text };
+    const recipient = options.to || options.email;
+    const emailUsername = process.env.EMAIL_USERNAME;
+    // Google displays app passwords in groups of four; SMTP requires no spaces.
+    const emailPassword = process.env.EMAIL_PASSWORD?.replace(/\s/g, '');
 
-        const recipient = options.to || options.email;
-
-        const transporter = nodeMailer.createTransport({
-            service: 'Gmail',
-            auth: {
-                user: process.env.EMAIL_USERNAME,
-                pass: process.env.EMAIL_PASSWORD,
-            },
-        });
-        const mailOptions = {
-            from: process.env.EMAIL_USERNAME,
-            to: recipient,
-            subject: options.subject,
-            text: options.text || options.message,
-            html: options.html || options.message,
-        };
-
-        if (!mailOptions.to) {
-            throw new Error('No recipients defined');
-        }
-
-        await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully');
-    } catch (error) {
-        console.error('Error sending email:', error);
+    if (!emailUsername || !emailPassword) {
+        throw new Error('Email delivery is not configured');
     }
+    if (!recipient) {
+        throw new Error('No recipients defined');
+    }
+
+    const transporter = nodeMailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: emailUsername,
+            pass: emailPassword,
+        },
+    });
+    const mailOptions = {
+        from: emailUsername,
+        to: recipient,
+        subject: options.subject,
+        text: options.text || options.message,
+        html: options.html || options.message,
+    };
+
+    const result = await transporter.sendMail(mailOptions);
+    console.log(`Email sent successfully: ${result.messageId}`);
+    return result;
 };
 
 module.exports = sendEmail;
